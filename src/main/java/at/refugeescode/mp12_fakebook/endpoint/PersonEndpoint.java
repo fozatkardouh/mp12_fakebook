@@ -20,13 +20,17 @@ public class PersonEndpoint {
     private final FriendAndUnfriendController friendAndUnfriendController;
 
     @PostMapping
-    public Person addPerson(@RequestBody Friend friend) {
-        Friend newfriend = friendRepository.save(friend);
-        Person person = Person.builder()
-                .id(newfriend.getId())
-                .name(newfriend.getName())
-                .build();
+    public Person addPerson(@RequestBody Friend newfriend) {
+        Friend friend = friendRepository.save(newfriend);
+        Person person = getPerson(friend);
         return personRepository.save(person);
+    }
+
+    private Person getPerson(Friend friend) {
+        return Person.builder()
+                    .id(friend.getId())
+                    .name(friend.getName())
+                    .build();
     }
 
     @GetMapping

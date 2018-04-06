@@ -32,13 +32,6 @@ public class FriendAndUnfriendController {
         return true;
     }
 
-    private Friend getFriendFrom(Person person) {
-        return Friend.builder()
-                .id(person.getId())
-                .name(person.getName())
-                .build();
-    }
-
     public Boolean unfriendPeople(Long id1, Long id2) {
         Optional<Person> optionalPerson1 = personRepository.findById(id1);
         if (!optionalPerson1.isPresent()) {
@@ -55,6 +48,13 @@ public class FriendAndUnfriendController {
         personRepository.save(person1);
         personRepository.save(person2);
         return true;
+    }
+
+    private Friend getFriendFrom(Person person) {
+        return Friend.builder()
+                .id(person.getId())
+                .name(person.getName())
+                .build();
     }
 
 }
