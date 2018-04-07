@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -18,9 +18,9 @@ public class Person {
     @Id
     private Long id;
     private String name;
-    @OneToMany(targetEntity = Friend.class)
+    @OneToMany
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<Friend> friends;
+    private Set<Friend> friends;
 
     public void addFriend(Friend friend) {
         friends.add(friend);
